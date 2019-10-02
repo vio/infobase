@@ -65,6 +65,7 @@
     "html2canvas": "^1.0.0-rc.1",
     "http-server": "^0.11.1",
     "ip": "^1.1.5",
+    "jest": "^24.9.0",
     "js-yaml": "^3.13.1",
     "json-loader": "^0.5.2",
     "jspdf": "^1.5.3",
@@ -137,7 +138,10 @@
     "ci_route_load_tests": "node browser-tests/route-load-tests.js CHROMIUM HEADLESS NO_SANDBOX",
     "ci_serve": "http-server -s -a 127.0.0.1",
     "serve-loopback": "http-server -a 127.0.0.1",
-    "serve": "http-server"
+    "serve": "http-server",
+    "test": "jest --coverage --forceExit",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --coverage --forceExit --runInBand",
+    "test:watch": "jest --watch"
   },
   "authors": [
     "Alex Cousineau-Leduc",
