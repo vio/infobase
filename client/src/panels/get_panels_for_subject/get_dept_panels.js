@@ -51,7 +51,7 @@ import {
   declare_employee_last_year_totals_panel,
   declare_detailed_program_spending_split_panel,
   declare_services_intro_panel,
-  declare_services_target_group_panel,
+  declare_services_fees_panel,
 } from '../../panels/panel_declarations/index.js';
 
 
@@ -104,7 +104,7 @@ export const get_dept_panels = subject => ensure_loaded({
   ],
   services: subject.has_data('services_data') && [
     declare_services_intro_panel(),
-    declare_services_target_group_panel(),
+    declare_services_fees_panel(),
   ],
   related: _.nonEmpty(subject.programs) && [
     declare_portfolio_structure_related_panel(),
