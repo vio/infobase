@@ -54,6 +54,7 @@ import {
   declare_services_fees_panel,
   declare_services_ids_panel,
   declare_services_channels_panel,
+  declare_services_digital_status_panel,
 } from '../../panels/panel_declarations/index.js';
 
 
@@ -109,6 +110,7 @@ export const get_dept_panels = subject => ensure_loaded({
     declare_services_fees_panel(),
     declare_services_ids_panel(),
     declare_services_channels_panel(),
+    declare_services_digital_status_panel(),
   ],
   related: _.nonEmpty(subject.programs) && [
     declare_portfolio_structure_related_panel(),

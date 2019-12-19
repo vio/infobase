@@ -19,7 +19,7 @@ import FootNote from '../../models/footnotes.js';
 import { GlossaryEntry } from '../../models/glossary.js';
 
 import * as declarative_charts from '../../charts/declarative_charts.js';
-import { NivoResponsiveBar, NivoResponsiveHBar, NivoResponsiveLine, NivoResponsivePie, get_formatter } from '../../charts/NivoCharts.js';
+import { NivoResponsiveBar, NivoResponsiveHBar, NivoResponsiveLine, NivoResponsivePie, NivoResponsiveHeatMap, get_formatter } from '../../charts/NivoCharts.js';
 import { Canada } from '../../charts/canada.js';
 import { FlatTreeMapViz } from '../../charts/flat_treemap/FlatTreeMapViz.js';
 
@@ -497,6 +497,7 @@ export {
   NivoResponsiveHBar,
   NivoResponsiveLine,
   NivoResponsivePie,
+  NivoResponsiveHeatMap,
   Canada,
   FlatTreeMapViz,
   breakpoints,

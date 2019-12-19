@@ -1,6 +1,7 @@
 import { ResponsiveBar } from '@nivo/bar';
 import { ResponsiveLine } from '@nivo/line';
 import { ResponsivePie } from '@nivo/pie';
+import { ResponsiveHeatMap } from '@nivo/heatmap';
 import { formats, dollar_formats } from "../core/format.js";
 import { Fragment } from 'react';
 import { IconZoomIn, IconZoomOut } from '../icons/icons.js';
@@ -559,6 +560,68 @@ NivoResponsiveLine.defaultProps = {
   },
   motion_damping: 19,
   motion_stiffness: 100,
+};
+
+
+
+export class NivoResponsiveHeatMap extends React.Component {
+  render(){
+    const {
+      data,
+      tooltip,
+      keys,
+      indexBy,
+      forceSquare,
+      padding,
+      margin,
+      colors,
+      cellOpacity,
+      cellBorderWidth,
+      cellBorderColor,
+      enableLabels,
+      labelTextColor,
+      top_axis,
+      bttm_axis,
+      left_axis,
+      right_axis,
+      remove_bottom_axis,
+      remove_left_axis,
+      motion_stiffness,
+      motion_damping,
+    } = this.props;
+
+    return (
+      <ResponsiveHeatMap
+        {...{
+          data,
+          keys,
+          indexBy,
+          forceSquare,
+          padding,
+          margin,
+          colors,
+          cellOpacity,
+          cellBorderWidth,
+          cellBorderColor,
+          enableLabels,
+          labelTextColor,
+        }}
+        tooltip={tooltip}
+        axisBottom={remove_bottom_axis ? null : bttm_axis}
+        axisLeft={remove_left_axis ? null : left_axis}
+        axisTop={top_axis}
+        axisRight={right_axis}
+        animate={true}
+        motionStiffness={motion_stiffness}
+        motionDamping={motion_damping}
+      />
+    );
+  }
+}
+NivoResponsiveHeatMap.defaultProps = {
+  ...general_default_props,
+  forceSquare: true,
+  cellOpacity: 1,
 };
 
 export {
