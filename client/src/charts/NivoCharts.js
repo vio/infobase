@@ -6,6 +6,7 @@ import { formats, dollar_formats } from "../core/format.js";
 import { Fragment } from 'react';
 import { IconZoomIn, IconZoomOut } from '../icons/icons.js';
 import { trivial_text_maker } from '../models/text.js';
+import { DisplayTable } from '../components/DisplayTable.js';
 import './NivoCharts.scss';
 
 
@@ -188,6 +189,12 @@ NivoResponsivePie.defaultProps = {
 };
 
 export class NivoResponsiveBar extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      show_table: false,
+    };
+  }
 
   render(){
     const{
@@ -225,54 +232,85 @@ export class NivoResponsiveBar extends React.Component{
       animate,
       labelTextColor,
       borderWidth,
+      table_switch,
+      table_data_headers,
     } = this.props;
     legends && (legends[0].symbolShape = fixedSymbolShape);
 
+    const {
+      show_table,
+    } = this.state;
+
+    const table_data = _.map(data, row => ({col_data: row, label: row[indexBy], sort_keys: row}));
+
     return (
-      //have to have an empty string in key to make sure
-      //that negative bars will be displayed
-      <ResponsiveBar
-        {...{data,
-          margin,
-          colors,
-          groupMode,
-          enableGridX,
-          enableGridY,
-          colorBy,
-          theme, 
-          indexBy, 
-          enableLabel, 
-          legends,
-          isInteractive,
-          motion_damping,
-          motion_stiffness,
-          onMouseEnter,
-          onMouseLeave,
-          onClick,
-          padding,
-          tooltip,
-          label,
-          animate,
-          labelTextColor,
-          borderWidth,
-        }}
-        keys = {_.union([''],keys)}
-        labelFormat={_.isUndefined(label_format) ? null : label_format}
-        tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
-        axisBottom={remove_bottom_axis ? null : bttm_axis}
-        axisLeft={
-          remove_left_axis ?
-            null :
-            {
-              tickValues: tick_value || 6,
-              format: (d) => get_formatter(is_money, text_formatter)(d),
-              min: min,
-              max: max,
-              ...(left_axis || {}),
+      <Fragment>
+        {/* have to have an empty string in key to make sure
+        that negative bars will be displayed */}
+        { !show_table ?
+          <ResponsiveBar
+            {...{data,
+              margin,
+              colors,
+              groupMode,
+              enableGridX,
+              enableGridY,
+              colorBy,
+              theme, 
+              indexBy, 
+              enableLabel, 
+              legends,
+              isInteractive,
+              motion_damping,
+              motion_stiffness,
+              onMouseEnter,
+              onMouseLeave,
+              onClick,
+              padding,
+              tooltip,
+              label,
+              animate,
+              labelTextColor,
+              borderWidth,
+            }}
+            keys = {_.union([''],keys)}
+            labelFormat={_.isUndefined(label_format) ? null : label_format}
+            tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
+            axisBottom={remove_bottom_axis ? null : bttm_axis}
+            axisLeft={
+              remove_left_axis ?
+                null :
+                {
+                  tickValues: tick_value || 6,
+                  format: (d) => get_formatter(is_money, text_formatter)(d),
+                  min: min,
+                  max: max,
+                  ...(left_axis || {}),
+                }
             }
+            borderColor="inherit:darker(1.6)"
+          /> :
+          <DisplayTable data={table_data} label_col_header={table_data_headers[0]} column_keys={keys} sort_keys={keys} table_data_headers={_.slice(table_data_headers, 1)} table_name={"TODO"}/>
         }
-        borderColor="inherit:darker(1.6)"
-      />
+        {table_switch &&
+          <button
+            style={{
+              zIndex: 999,
+              padding: "0px",
+            }}
+            className="btn-ib-zoom"
+            onClick={ 
+              () => {
+                this.setState({
+                  show_table: !show_table,
+                });
+              }
+            }
+          >
+            { this.state.show_table ? trivial_text_maker("switch_to_graph") : trivial_text_maker("switch_to_table") }
+          </button>
+        }
+      </Fragment>
     );
   }
 };
@@ -288,6 +326,7 @@ NivoResponsiveBar.defaultProps = {
   isInteractive: true,
   motion_damping: 15,
   motion_stiffness: 95,
+  table_switch: false,
 };
 
 

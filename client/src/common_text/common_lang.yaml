@@ -1120,6 +1120,14 @@ zoom_out:
   en: Zoom out
   fr: Dézoomer
 
+switch_to_graph:
+  en: Switch to graph
+  fr: TODO
+
+switch_to_table:
+  en: Switch to table
+  fr: TODO
+
 arrow:
   en: Arrow
   fr: Flèche
