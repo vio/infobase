@@ -217,7 +217,7 @@ const sources = _.mapValues({
       return _.map(
         tables_from_source_key("SERVICES"),
         table_to_row_item
-      )
+      );
     },
   }, 
 }, (obj, key) => ({...obj, key}));
