@@ -234,6 +234,7 @@ export class NivoResponsiveBar extends React.Component{
       borderWidth,
       table_switch,
       table_data_headers,
+      graph_height,
     } = this.props;
     legends && (legends[0].symbolShape = fixedSymbolShape);
 
@@ -248,49 +249,51 @@ export class NivoResponsiveBar extends React.Component{
         {/* have to have an empty string in key to make sure
         that negative bars will be displayed */}
         { !show_table ?
-          <ResponsiveBar
-            {...{data,
-              margin,
-              colors,
-              groupMode,
-              enableGridX,
-              enableGridY,
-              colorBy,
-              theme, 
-              indexBy, 
-              enableLabel, 
-              legends,
-              isInteractive,
-              motion_damping,
-              motion_stiffness,
-              onMouseEnter,
-              onMouseLeave,
-              onClick,
-              padding,
-              tooltip,
-              label,
-              animate,
-              labelTextColor,
-              borderWidth,
-            }}
-            keys = {_.union([''],keys)}
-            labelFormat={_.isUndefined(label_format) ? null : label_format}
-            tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
-            axisBottom={remove_bottom_axis ? null : bttm_axis}
-            axisLeft={
-              remove_left_axis ?
-                null :
-                {
-                  tickValues: tick_value || 6,
-                  format: (d) => get_formatter(is_money, text_formatter)(d),
-                  min: min,
-                  max: max,
-                  ...(left_axis || {}),
+            <div style={{height: graph_height || null}}>
+              <ResponsiveBar
+                {...{data,
+                  margin,
+                  colors,
+                  groupMode,
+                  enableGridX,
+                  enableGridY,
+                  colorBy,
+                  theme, 
+                  indexBy, 
+                  enableLabel, 
+                  legends,
+                  isInteractive,
+                  motion_damping,
+                  motion_stiffness,
+                  onMouseEnter,
+                  onMouseLeave,
+                  onClick,
+                  padding,
+                  tooltip,
+                  label,
+                  animate,
+                  labelTextColor,
+                  borderWidth,
+                }}
+                keys = {_.union([''],keys)}
+                labelFormat={_.isUndefined(label_format) ? null : label_format}
+                tooltip={ (d) => tooltip( [d], get_formatter(is_money, text_formatter, false) ) }
+                axisBottom={remove_bottom_axis ? null : bttm_axis}
+                axisLeft={
+                  remove_left_axis ?
+                    null :
+                    {
+                      tickValues: tick_value || 6,
+                      format: (d) => get_formatter(is_money, text_formatter)(d),
+                      min: min,
+                      max: max,
+                      ...(left_axis || {}),
+                    }
                 }
-            }
-            borderColor="inherit:darker(1.6)"
-          /> :
-          <DisplayTable data={table_data} label_col_header={table_data_headers[0]} column_keys={keys} sort_keys={keys} table_data_headers={_.slice(table_data_headers, 1)} table_name={"TODO"}/>
+                borderColor="inherit:darker(1.6)"
+              /> 
+            </div> :
+            <DisplayTable data={table_data} label_col_header={table_data_headers[0]} column_keys={keys} sort_keys={keys} table_data_headers={_.slice(table_data_headers, 1)} table_name={"TODO"}/>
         }
         {table_switch &&
           <button
