@@ -299,9 +299,8 @@ export class NivoResponsiveBar extends React.Component{
           <button
             style={{
               zIndex: 999,
-              padding: "0px",
             }}
-            className="btn-ib-zoom"
+            className="btn-table-view btn-group-lg btn-ib-primary"
             onClick={ 
               () => {
                 this.setState({
@@ -685,9 +684,8 @@ export class NivoResponsiveHeatMap extends React.Component {
           <button
             style={{
               zIndex: 999,
-              padding: "0px",
             }}
-            className="btn-ib-zoom"
+            className="btn-table-view btn-group-lg btn-ib-primary"
             onClick={ 
               () => {
                 this.setState({
