@@ -100,7 +100,7 @@ const get_planned_fte_source_link = subject => {
 };
 
 
-const CommonDonut = function({graph_data, legend_data, graph_height}){
+const CommonDonut = function({graph_data, legend_data, graph_height, data_format}){
   const color_scale = infobase_colors_smart( d3.scaleOrdinal().range(newIBCategoryColors) );
 
   const has_neg = _.chain(legend_data)
@@ -145,7 +145,7 @@ const CommonDonut = function({graph_data, legend_data, graph_height}){
                 (item) => (
                   <div style={{width: "120px", display: "flex"}}>
                     <div style={{width: "60px"}}>
-                      <Format type="compact1" content={item.value} />
+                      <Format type={data_format || "compact1"} content={item.value} />
                     </div>
                     <div style={{width: "60px"}}>
                       <Format type="percentage1" content={(item.value)*Math.pow(total,-1)} />
