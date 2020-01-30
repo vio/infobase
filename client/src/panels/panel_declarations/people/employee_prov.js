@@ -259,6 +259,7 @@ class ProvPanel extends React.Component {
                   </p>
                   <GraphLegend
                     items={legend_items}
+                    isSolidBox
                   />
                 </div>
                 <div className="legend-container" style={{ maxHeight: "400px", width: "100%", overflowY: "hidden", marginTop: "10px"}}>

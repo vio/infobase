@@ -119,6 +119,7 @@ export const declare_internal_services_panel = () => declare_panel({
             <div className="well legend-container">
               <GraphLegend
                 items={legend_items}
+                isSolidBox
               />
             </div>
           </div>
